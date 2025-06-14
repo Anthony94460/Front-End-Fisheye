@@ -6,32 +6,75 @@
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
     <title>Fisheye - photographe </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   </head>
   <body>
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <a href="index.html" aria-label="Page d'acceuil de Fisheye">
+        <img src="assets/images/logo.png" class="logo" alt="Fishey Home" />
+      </a>
     </header>
     <main id="main">
       <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <div class="photograph-info" aria-label="informations du photographe">
+        </div>
+        <button class="contact_button" onclick="displayModal()" aria-label="Contacer le photographe">Contactez-moi</button>
+        <div class="image-container">
+          <img class="photographer-portrait" src="" alt="">
+        </div>
+      </div>
+      <div class="select">
+        <p>Trier par</p>
+        <div class="custom-dropdown" tabindex="0" aria-haspopup="listbox" aria-expanded="false" role="combobox" aria-label="Trier les médias">
+  <span class="selected" aria-live="polite">Popularité&nbsp;&nbsp;&nbsp;
+    <span class="arrow" aria-hidden="true"><i class="fa-solid fa-angle-down"></i></span>
+  </span>
+  <ul class="dropdown-options" role="listbox" tabindex="-1" hidden>
+    <li role="option" data-value="popularity" aria-selected="true">Popularité</li>
+    <li role="option" data-value="date" aria-selected="false">Date</li>
+    <li role="option" data-value="title" aria-selected="false">Titre</li>
+  </ul>
+</div>
+      </div>
+      <div id="contact_modal" class="modal" role="dialog" arial-hidden="true" aria-labelledby="modal-title">
+        <div class="modal">
+          <header>
+            <h2>Contactez-moi</h2>
+            <img src="assets/icons/close.svg" onclick="closeModal()" alt="Fermer la fenêtre de contact" role="button" tabindex="0"/>
+          </header>
+          <form id="contact-form">
+            <div>
+              <label for="first-name">Prénom</label>
+              <input id="first-name" name="first-name" type="text" aria-label="Votre prénom" required/>
+            </div>
+            <div>
+              <label for="last-name">Nom</label>
+              <input id="last-name" name="last-name" type="text" aria-label="Votre nom" required/>
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" aria-label="Votre email" required/>
+            </div>
+            <div>
+              <label for="message">Votre message</label>
+              <input id="message" name="message" type="text-message" aria-label="Votre message" required/>
+            </div>
+            <button class="contact_button">Envoyer</button>
+          </form>
+        </div>
       </div>
     </main>
-    <div id="contact_modal">
-			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
-          <button class="contact_button">Envoyer</button>
-				</form>
-			</div>
-		</div>
-    <script src="/scripts/pages/photographer.js"></script>
+    <div id="lightbox_wrapper" hidden>
+      <div class="lightbox">
+        <button class="close" aria-label="Fermer la visionneuse"></button>
+        <button class="next" aria-label="Image suivante"></button>
+        <button class="prev" aria-label="Image précédente"></button>
+        <div id="lightbox_media">
+          <h2></h2>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/scripts/pages/photographer.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
   </body>
 </html>
