@@ -1,3 +1,4 @@
+    
     async function getPhotographers() {
     console.log("getPhotographers() appelée");
 

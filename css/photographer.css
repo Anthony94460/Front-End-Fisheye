@@ -40,8 +40,6 @@
 }
 
 .photographer-portrait {
-    transform: scale(1.3);
-    transform-origin: center;
     width: 200px;
     height: 200px;
     object-fit: cover;
@@ -112,11 +110,16 @@ form input {
     height: 50px;
     border: none;
     border-radius: 5px;
+    font-size: 20px;
+    font-family: "DM Sans", sans-serif;
 }
 
-form input[type="text-message"] {
-    height: 150px;
+form textarea {
+    border: none;
+    border-radius: 5px;
     margin-bottom: 16px;
+    font-size: 20px;
+    font-family: "DM Sans", sans-serif;
 }
 
 .select {
@@ -125,7 +128,6 @@ form input[type="text-message"] {
     gap: 16px;
     margin-left: 5%;
     margin-top: 10px;
-    align-items: center;
 }
 
 .select p {
@@ -250,14 +252,22 @@ h2 {
     position: relative;
     max-width: 852px;
     max-height: 720px;
-    height: 90%;
-    width: 60%;
+    height: 100%;
+    width: 100%;
+    border: 50px solid #fff;
+}
+
+.lightbox video {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   
 }
 
 #lightbox_media {
     width: 100%;
     height: 100%;
-    border: 5 solid #fff;
+    
 }
 #lightbox_media img {
     width: 100%;
@@ -265,6 +275,8 @@ h2 {
     object-fit: cover;
     object-position: center;
 }
+
+
 
 .lightbox-title {
     color: #901C1C;
@@ -339,14 +351,14 @@ h2 {
     padding-bottom: 15px;
     border-radius: 5px;
     font-size: 20px;
-    display: flex;
-    flex-direction: column;
+    
     cursor: pointer;
 }
 
-.custom-dropdown .arrow {
+.arrow {
   transition: transform 0.3s ease;
   font-size: 1rem;
+  display: inline-block;
 }
 
 .custom-dropdown.open .arrow {
@@ -357,4 +369,22 @@ h2 {
     list-style: none;
     margin: 0;
     padding: 0;
+    padding-top: 15px;
 }
+
+.dropdown-options[hidden] {
+  display: none;
+}
+
+.hidden-option {
+  display: none;
+}
+
+.dropdown-options li:nth-child(3) {
+   padding-top: 15px;
+   padding-bottom: 15px;
+   
+}
+
+
+

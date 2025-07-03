@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.css" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
@@ -11,53 +11,53 @@
   <body>
     <header>
       <a href="index.html" aria-label="Page d'acceuil de Fisheye">
-        <img src="assets/images/logo.png" class="logo" alt="Fishey Home" />
+        <img src="assets/images/logo.png" class="logo" alt="Fishey Home">
       </a>
     </header>
     <main id="main">
       <div class="photograph-header">
-        <div class="photograph-info" aria-label="informations du photographe">
+        <div class="photograph-info" role="region" aria-label="informations du photographe">
         </div>
         <button class="contact_button" onclick="displayModal()" aria-label="Contacer le photographe">Contactez-moi</button>
         <div class="image-container">
-          <img class="photographer-portrait" src="" alt="">
+          <img class="photographer-portrait" src="assets/photographers/account.png" alt="Portrait du photographe">
         </div>
       </div>
       <div class="select">
         <p>Trier par</p>
         <div class="custom-dropdown" tabindex="0" aria-haspopup="listbox" aria-expanded="false" role="combobox" aria-label="Trier les médias">
-  <span class="selected" aria-live="polite">Popularité&nbsp;&nbsp;&nbsp;
-    <span class="arrow" aria-hidden="true"><i class="fa-solid fa-angle-down"></i></span>
-  </span>
-  <ul class="dropdown-options" role="listbox" tabindex="-1" hidden>
-    <li role="option" data-value="popularity" aria-selected="true">Popularité</li>
-    <li role="option" data-value="date" aria-selected="false">Date</li>
-    <li role="option" data-value="title" aria-selected="false">Titre</li>
-  </ul>
-</div>
+          <span class="selected" aria-live="polite">Popularité</span>
+          &nbsp;&nbsp;&nbsp;
+          <span class="arrow" aria-hidden="true"><i class="fa-solid fa-angle-down"></i></span>
+          <ul class="dropdown-options" role="listbox" hidden>
+            <li role="option" data-value="popularity" aria-selected="true" tabindex="0">Popularité</li>
+            <li role="option" data-value="date" aria-selected="false" tabindex="0">Date</li>
+            <li role="option" data-value="title" aria-selected="false" tabindex="0">Titre</li>
+          </ul>
+        </div>
       </div>
-      <div id="contact_modal" class="modal" role="dialog" arial-hidden="true" aria-labelledby="modal-title">
+      <div id="contact_modal" class="modal" role="dialog" aria-hidden="true" aria-labelledby="modal-title">
         <div class="modal">
           <header>
-            <h2>Contactez-moi</h2>
-            <img src="assets/icons/close.svg" onclick="closeModal()" alt="Fermer la fenêtre de contact" role="button" tabindex="0"/>
+            <h2 id="modal-title">Contactez-moi</h2>
+            <img src="assets/icons/close.svg" onclick="closeModal()" alt="Fermer la fenêtre de contact" role="button" tabindex="0">
           </header>
           <form id="contact-form">
             <div>
               <label for="first-name">Prénom</label>
-              <input id="first-name" name="first-name" type="text" aria-label="Votre prénom" required/>
+              <input id="first-name" name="first-name" type="text" aria-label="Votre prénom" required>
             </div>
             <div>
               <label for="last-name">Nom</label>
-              <input id="last-name" name="last-name" type="text" aria-label="Votre nom" required/>
+              <input id="last-name" name="last-name" type="text" aria-label="Votre nom" required>
             </div>
             <div>
               <label for="email">Email</label>
-              <input id="email" name="email" type="email" aria-label="Votre email" required/>
+              <input id="email" name="email" type="email" aria-label="Votre email" required>
             </div>
             <div>
               <label for="message">Votre message</label>
-              <input id="message" name="message" type="text-message" aria-label="Votre message" required/>
+              <textarea id="message" name="message" rows="6" aria-label="Votre message" required></textarea>
             </div>
             <button class="contact_button">Envoyer</button>
           </form>
@@ -70,7 +70,7 @@
         <button class="next" aria-label="Image suivante"></button>
         <button class="prev" aria-label="Image précédente"></button>
         <div id="lightbox_media">
-          <h2></h2>
+          <h2 id="lightbox-title" class="sr-only">Titre du média</h2>
         </div>
       </div>
     </div>
