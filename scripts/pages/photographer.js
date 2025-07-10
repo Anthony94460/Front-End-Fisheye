@@ -40,7 +40,7 @@ function trapFocus(container) {
 
 let medias = [];
 let currentIndex = 0;
-let focusedOptionIndex = -1;
+
 
 // Fonction principale
 async function displayPhotographerProfile() {
@@ -310,87 +310,31 @@ function toggleDropdown() {
 
   if (!isOpen) {
     applyMiddleBorder();
-    removeFocusTrap = trapFocus(options)
+    
   }
 }
 
+// Gestion souris
 dropdown.addEventListener('click', toggleDropdown);
 
+// Gestion clavier
 dropdown.addEventListener('keydown', (e) => {
-  const isOpen = dropdown.classList.contains('open');
-
-  if (!isOpen && (e.key === 'Enter' || e.key === ' ')) {
+  if (e.key === 'Enter' || e.key === ' ') {
     e.preventDefault();
     toggleDropdown();
-    return;
-  }
-
-  const optionElements = Array.from(options.querySelectorAll('[role="option"]'))
-    .filter(opt => opt.style.display !== 'none');
-
-    optionElements.forEach((option, index) => {
-  option.addEventListener('keydown', (e) => {
-    if (e.key === 'Tab' && !e.shiftKey) {
-      // Si on est sur la dernière option et on appuie sur Tab
-      if (index === optionElements.length - 1) {
-        e.preventDefault();
-        optionElements[0].focus(); // Revenir à la première option
-      }
-    }
-
-    // Optionnel : boucle aussi avec Shift+Tab
-    if (e.key === 'Tab' && e.shiftKey) {
-      if (index === 0) {
-        e.preventDefault();
-        optionElements[optionElements.length - 1].focus(); // Aller à la dernière option
-      }
-    }
-  });
-});
-
-  switch (e.key) {
-    case 'ArrowDown':
-      e.preventDefault();
-      focusedOptionIndex = (focusedOptionIndex + 1) % optionElements.length;
-      optionElements[focusedOptionIndex].focus();
-      break;
-
-    case 'ArrowUp':
-      e.preventDefault();
-      focusedOptionIndex = (focusedOptionIndex - 1 + optionElements.length) % optionElements.length;
-      optionElements[focusedOptionIndex].focus();
-      break;
-
-    case 'Enter':
-    case ' ':
-      e.preventDefault();
-      if (focusedOptionIndex >= 0) {
-        // Sélection sans fermeture
-        const selected = optionElements[focusedOptionIndex];
-        selected.setAttribute('aria-selected', 'true');
-        selectedText.textContent = selected.textContent;
-        sortMedias(selected.dataset.value);
-        // Pas de fermeture ici
-        selected.focus();
-      }
-      break;
-
-    case 'Escape':
-      e.preventDefault();
-      dropdown.classList.remove('open');
-      dropdown.setAttribute('aria-expanded', 'false');
-      options.hidden = true;
-      dropdown.focus();
-      break;
+  } else if (e.key === 'Escape') {
+    toggleDropdown(false);
   }
 });
+
+
 
 
 const selectedText = dropdown.querySelector('.selected');
 const optionItems = dropdown.querySelectorAll('[role="option"]');
 
-optionItems.forEach(option => {
-  option.addEventListener('click', () => {
+optionItems.forEach((option, index) => {
+  function selectOption() {
     const selectedValue = option.dataset.value;
     selectedText.textContent = option.textContent;
 
@@ -401,12 +345,52 @@ optionItems.forEach(option => {
 
     option.setAttribute('aria-selected', 'true');
     option.classList.add('hidden-option');
-
-   // dropdown.classList.remove('open');
-   // dropdown.setAttribute('aria-expanded', 'false');
-   // options.hidden = true;
-    
     sortMedias(selectedValue);
+  }
+
+  option.addEventListener('click', selectOption);
+
+  option.addEventListener('keydown', (e) => {
+    
+
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      selectOption();
+    }
+
+    // 🔽 Flèche bas
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      const next = optionItems[(index + 1) % optionItems.length];
+      next.focus();
+    }
+
+    // 🔼 Flèche haut
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      const prev = optionItems[(index - 1 + optionItems.length) % optionItems.length];
+      prev.focus();
+    }
+
+    // 🔁 Tab cyclique
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      if (e.shiftKey) {
+        // Shift + Tab → vers le haut
+        const prev = optionItems[(index - 1 + optionItems.length) % optionItems.length];
+        prev.focus();
+      } else {
+        // Tab → vers le bas
+        const next = optionItems[(index + 1) % optionItems.length];
+        next.focus();
+      }
+    }
+
+    // ❌ Escape → fermer le menu
+    if (e.key === 'Escape') {
+      toggleDropdown(false);
+      dropdown.focus();
+    }
   });
 });
 
