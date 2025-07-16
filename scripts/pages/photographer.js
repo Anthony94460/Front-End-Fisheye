@@ -358,21 +358,18 @@ optionItems.forEach((option, index) => {
       selectOption();
     }
 
-    // 🔽 Flèche bas
     if (e.key === 'ArrowDown') {
       e.preventDefault();
       const next = optionItems[(index + 1) % optionItems.length];
       next.focus();
     }
 
-    // 🔼 Flèche haut
     if (e.key === 'ArrowUp') {
       e.preventDefault();
       const prev = optionItems[(index - 1 + optionItems.length) % optionItems.length];
       prev.focus();
     }
 
-    // 🔁 Tab cyclique
     if (e.key === 'Tab') {
       e.preventDefault();
       if (e.shiftKey) {
@@ -386,7 +383,6 @@ optionItems.forEach((option, index) => {
       }
     }
 
-    // ❌ Escape → fermer le menu
     if (e.key === 'Escape') {
       toggleDropdown(false);
       dropdown.focus();
